@@ -1,5 +1,5 @@
 #include <iostream>
-#include "matrix\MatrixEngine.h"
+#include "matrix/MatrixEngine.h"
 
 using namespace std;
 
@@ -18,19 +18,19 @@ int main(int arcg, char **argv){
 
 	GLXSDLDevice device;
 	device.Construct(SDL_INIT_EVERYTHING, glm::vec3(800, 600, 32), false);
-	device.SetCaption("Matrix Engine"); 
+	device.SetCaption("Matrix Engine");
 
 
 	GLXSDLSceneGraph *sceneGraph = new GLXSDLSceneGraph();
-	 
+
 	GLXSDLSceneInstance *instance = new GLXSDLSceneInstance();
 	GLXSDLSceneEntity *node = new GLXSDLSceneEntity(instance);
 	sceneGraph->AddEntityNode(node);
-	
+
 	node->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(),"a"));
 	node->GetChild(0)->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(), "subchild"));
 	node->GetChild(0)->GetChild(0)->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(), "sub-sub-child"));
-	 
+
 	node->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(),"b"));
 	node->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(),"c"));
 	node->AddChild(new GLXSDLSceneEntity(new GLXSDLSceneInstance(),"d"));
@@ -49,7 +49,7 @@ int main(int arcg, char **argv){
 	renderer->LoadShader("data/shader/default_model.vs", "data/shader/default_model.fs");
 
 	GLXSDLSceneEntity *node2 = new GLXSDLSceneEntity(renderer,"MeshRenderer1");
-	node2->translate(vec3(0.0, 0.0, -1.0));
+	node2->translate(vec3(0.0, 0.0, -10.0));
 	node2->rotate(0.0, 1.0, 1.0, 1.0);
 	node2->scale(vec3(1.0, 1.0, 1.0));
 
@@ -61,10 +61,13 @@ int main(int arcg, char **argv){
 		cout << "Node " << i << ": " << sceneGraph->GetNode(i)->getNodeName() << endl;
 		PrintChildren(sceneGraph->GetNode(i));
 	}
-	
+
 	cout << endl << endl << endl;
 
 	cout << "Now rendering" << endl;
+
+    GLXSDLCamera *camera = new GLXSDLCamera();
+    camera->SetPosition(vec3(0.0,0.0,0.0));
 
 	while (running)
 	{
@@ -73,13 +76,17 @@ int main(int arcg, char **argv){
 		GLXSDLRenderPipeline::PrepareForRendering();
 		GLXSDLRenderPipeline::ClearScreen(vec4(0.0, 0.0, 1.0, 1.0));
 
+        camera->ApplyTransform();
+
 		sceneGraph->RenderScene();
 
 		GLXSDLRenderPipeline::SwapBuffer();
 	}
 
-	delete sceneGraph;
+    delete camera;
 	delete mesh;
+	delete sceneGraph;
+
 
 	MatrixEngine::MatrixEngine_Quit();
 	return 0;

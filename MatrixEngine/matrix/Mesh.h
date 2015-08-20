@@ -5,11 +5,19 @@
 #include "Material.h"
 #include "VAO.h"
 
+#ifdef WIN32
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
+#else
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#endif // WIN32
 
 using namespace Assimp;
 
@@ -38,13 +46,14 @@ class MeshSection {
 class Components::Mesh {
 	public :
 		Mesh();
+        ~Mesh();
 
 		void LoadFromFile(string file);
 
-		
+
 	protected :
 		std::vector<MeshSection> sections;
-		
+
 		friend class MatrixEngine::Graphics::Render::MeshRenderer;
 
 	private :
