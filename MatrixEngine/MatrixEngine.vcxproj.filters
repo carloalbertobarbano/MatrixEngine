@@ -36,9 +36,6 @@
     <ClCompile Include="matrix\GLXSDLSceneGraph.cpp">
       <Filter>File di origine\matrix</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>File di origine\matrix</Filter>
-    </ClCompile>
     <ClCompile Include="matrix\Material.cpp">
       <Filter>File di origine\matrix</Filter>
     </ClCompile>
@@ -62,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="matrix\VAO.cpp">
       <Filter>File di origine\matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

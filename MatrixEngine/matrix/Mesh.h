@@ -5,7 +5,7 @@
 #include "Material.h"
 #include "VAO.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #include <assimp\Importer.hpp>
 #include <assimp\scene.h>

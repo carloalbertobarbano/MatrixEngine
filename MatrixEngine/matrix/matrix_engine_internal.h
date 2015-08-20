@@ -11,7 +11,7 @@
 #include <string>
 
 #define GLM_FORCE_INLINE
-#ifdef WIN32
+#ifdef _WIN32
 
 #include <glm\glm.hpp>
 

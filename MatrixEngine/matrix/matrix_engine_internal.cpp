@@ -56,7 +56,7 @@ char* IOStream::textFileRead(string filen)
 	if (filen.c_str() != NULL)
 	{
 		FILE *file = fopen(filen.c_str(), "rt");
-
+		
 		if (file != NULL) {
 			fseek(file, 0, SEEK_END);
 			int count = ftell(file);
