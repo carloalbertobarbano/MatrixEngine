@@ -11,6 +11,8 @@
 #include <string>
 
 #define GLM_FORCE_INLINE
+#ifdef WIN32
+
 #include <glm\glm.hpp>
 
 #include <glm\vec2.hpp>
@@ -34,6 +36,34 @@
 #include <assimp\scene.h>
 #include <assimp\postprocess.h>
 
+
+#else //UNIX
+
+#include <glm/glm.hpp>
+
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/constants.hpp>
+
+#include <GL/glew.h>
+
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+
+#define NO_SDL_GLEXT
+#include <SDL/SDL_opengl.h>
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#endif // WIN32
+
 #define PI 3.141592653589793
 
 using namespace std;
@@ -55,14 +85,14 @@ namespace MatrixEngine {
 	class GLXSDLDevice;
 	class GLXSDLRenderPipeline;
 	class GLXSDLCamera;
-	
+
 	namespace Scene {
 		class GLXSDLSceneGraph;
 		class GLXSDLSceneEntity;
 		class GLXSDLSceneInstance;
 
 		extern GLXSDLSceneGraph *_pCurrentSceneGraph;
-		
+
 
 		namespace Components {
 			class Mesh;

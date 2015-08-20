@@ -42,6 +42,10 @@ Mesh::Mesh(){
 
 }
 
+Mesh::~Mesh() {
+    cout << "Deleting mesh " << endl;
+}
+
 void Mesh::LoadFromFile(string file) {
 	cout << "Loading " << file << ".." << endl;
 
@@ -54,7 +58,7 @@ void Mesh::LoadFromFile(string file) {
 	}
 
 
-	
+
 	processNode(scene->mRootNode, scene);
 
 	cout << "Mesh " << file << " loaded. " << endl;
@@ -74,7 +78,7 @@ void Mesh::processNode(aiNode *node, const aiScene *scene) {
 
 void Mesh::processMesh(aiMesh *mesh, const aiScene *scene) {
 	MeshSection section;
-	
+
 	for (int i = 0; i < mesh->mNumVertices; i++) {
 		vec3 vert(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 		vec3 norm(mesh->mNormals[i].x,  mesh->mNormals[i].y,  mesh->mNormals[i].z);
@@ -116,7 +120,7 @@ void Mesh::processMesh(aiMesh *mesh, const aiScene *scene) {
 	section.material = material;
 
 	for (int i = 0; i < mat->GetTextureCount(aiTextureType_DIFFUSE); i++) {
-		aiString name; 
+		aiString name;
 		mat->GetTexture(aiTextureType_DIFFUSE, i, &name);
 
 		section.material.texture_diffuse.load_from_file(name.C_Str());

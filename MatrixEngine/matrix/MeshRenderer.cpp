@@ -13,7 +13,6 @@ MeshRenderer::MeshRenderer(Components::Mesh *mesh) : GLXSDLSceneInstance() {
 
 MeshRenderer::~MeshRenderer()
 {
-
 	if (shader)
 	{
 		shader->detach_shader(shader_vert);
@@ -47,7 +46,7 @@ void MeshRenderer::LoadShader(string vs, string fs, string gs)
 }
 
 void MeshRenderer::Render() {
-	
+
 	entity->buildTransformMatrix();
 	mat4 transformMatrix = entity->getTransofrmMatrix();
 
@@ -60,7 +59,6 @@ void MeshRenderer::Render() {
 		shader->sendUniform1i(shader->getUniformLocation("texture_bump"), 2);
 
 		vec3 camera_pos = -MatrixEngine::_pCurrentCamera->GetPosition();
-
 		shader->sendUniform3f(shader->getUniformLocation("camera_position"), camera_pos);
 
 		/*if (Graphics::_pCurrentTextureCube)
