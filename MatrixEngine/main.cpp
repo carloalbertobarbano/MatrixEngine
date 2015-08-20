@@ -1,5 +1,14 @@
 #include <iostream>
+
+#ifdef WIN32
+
+#include "matrix\MatrixEngine.h"
+
+#else
 #include "matrix/MatrixEngine.h"
+
+
+#endif // WIN32
 
 using namespace std;
 
